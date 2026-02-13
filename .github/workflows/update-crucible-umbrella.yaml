@@ -62,7 +62,7 @@ jobs:
           cd charts/crucible
 
           # Get current version
-          CURRENT_VERSION=$(yq eval '.version' Chart.yaml)
+          CURRENT_VERSION=$(yq -r .version Chart.yaml)
           echo "Current version: $CURRENT_VERSION"
 
           # Parse version
@@ -92,7 +92,7 @@ jobs:
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
           # Update Chart.yaml version
-          yq eval -i ".version = \"$NEW_VERSION\"" Chart.yaml
+          sed -i "s/^version: .*/version: $NEW_VERSION/" Chart.yaml
 
       - name: Create Pull Request
         if: steps.update.outputs.has_changes == 'true'
