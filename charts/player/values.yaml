@@ -37,14 +37,14 @@ player-api:
       nginx.ingress.kubernetes.io/proxy-send-timeout: "86400"
       nginx.ingress.kubernetes.io/use-regex: "true"
     hosts:
-      - host: player.example.com
-        paths:
-          - path: /(hubs|swagger|api)
-            pathType: ImplementationSpecific
+    - host: player.example.com
+      paths:
+      - path: /(hubs|swagger|api)
+        pathType: ImplementationSpecific
     tls:
-      - secretName: ""
-        hosts:
-          - example.com
+    - secretName: ""
+      hosts:
+      - example.com
 
   # If this deployment needs to trust non-public certificates,
   # create a configMap with the needed certifcates and specify
@@ -101,7 +101,8 @@ player-api:
 
     # OAuth2 Identity Client for Application
     Authorization__Authority: https://identity.example.com
-    Authorization__AuthorizationUrl: https://identity.example.com/connect/authorize
+    Authorization__AuthorizationUrl: 
+      https://identity.example.com/connect/authorize
     Authorization__TokenUrl: https://identity.example.com/connect/token
     Authorization__AuthorizationScope: "player-api"
     Authorization__ClientId: player-api-dev
@@ -145,6 +146,7 @@ player-api:
     # Optional: override the service name reported to collectors
     # OTEL_SERVICE_NAME: player-api
 
+    AppSettingsSyncTest__ExtraKey: ""
 player-ui:
   # Ingress configuration example for NGINX
   # TLS and Host URLs need configured
@@ -154,14 +156,14 @@ player-ui:
     annotations:
       kubernetes.io/ingress.class: nginx
     hosts:
-      - host: player.example.com
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
+    - host: player.example.com
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
     tls:
-      - secretName: ""
-        hosts:
-          - example.com
+    - secretName: ""
+      hosts:
+      - example.com
 
   ## extraVolumeMounts and extraVolumes are stringified YAML of kubernetes volume definitions
   # Example use to overwrite the favicon from a file in a configMap:
@@ -246,14 +248,14 @@ vm-api:
       nginx.ingress.kubernetes.io/use-regex: "true"
       nginx.ingress.kubernetes.io/proxy-body-size: "100m"
     hosts:
-      - host: vm.example.com
-        paths:
-          - path: /(notifications|hubs|api|swagger)
-            pathType: ImplementationSpecific
+    - host: vm.example.com
+      paths:
+      - path: /(notifications|hubs|api|swagger)
+        pathType: ImplementationSpecific
     tls:
-      - secretName: ""
-        hosts:
-          - example.com
+    - secretName: ""
+      hosts:
+      - example.com
 
   # VM-API deployment adds a second ingress
   # - This ingress is used as a proxy for getting a websocket
@@ -281,12 +283,12 @@ vm-api:
             proxy_ssl_session_reuse on;
         }
     hosts:
-      - host: connect.example.com
-        paths: []
+    - host: connect.example.com
+      paths: []
     tls:
-      - secretName: ""
-        hosts:
-          - example.com
+    - secretName: ""
+      hosts:
+      - example.com
 
   # If this deployment needs to trust non-public certificates,
   # create a configMap with the needed certifcates and specify
@@ -333,7 +335,8 @@ vm-api:
 
     # OAuth2 Identity Client for Application
     Authorization__Authority: https://identity.example.com
-    Authorization__AuthorizationUrl: https://identity.example.com/connect/authorize
+    Authorization__AuthorizationUrl: 
+      https://identity.example.com/connect/authorize
     Authorization__TokenUrl: https://identity.example.com/connect/token
     Authorization__AuthorizationScope: "vm-api player-api"
     Authorization__ClientId: vm-api-dev
@@ -394,14 +397,14 @@ vm-ui:
     annotations:
       kubernetes.io/ingress.class: nginx
     hosts:
-      - host: vm.example.com
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
+    - host: vm.example.com
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
     tls:
-      - secretName: ""
-        hosts:
-          - example.com
+    - secretName: ""
+      hosts:
+      - example.com
 
   ## extraVolumeMounts and extraVolumes are stringified YAML of kubernetes volume definitions
   # Example use to overwrite the favicon from a file in a configMap:
@@ -463,14 +466,14 @@ console-ui:
     annotations:
       kubernetes.io/ingress.class: nginx
     hosts:
-      - host: console.example.com
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
+    - host: console.example.com
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
     tls:
-      - secretName: ""
-        hosts:
-          - example.com
+    - secretName: ""
+      hosts:
+      - example.com
 
   ## extraVolumeMounts and extraVolumes are stringified YAML of kubernetes volume definitions
   # Example use to overwrite the favicon from a file in a configMap:
