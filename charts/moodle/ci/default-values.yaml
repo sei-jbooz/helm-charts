@@ -3,3 +3,10 @@
 moodle:
   database:
     existingSecret: moodle-db
+# THROWAWAY: seeded bug for a negative CI test. Not for merge.
+extraVolumes:
+  - name: extra
+    emptyDir: {}
+extraVolumeMounts:
+  - name: extra
+    mountPath: /var/www/moodledata
